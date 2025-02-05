@@ -48,13 +48,16 @@ except json.JSONDecodeError as e:
     print(f"Error parsing the JSON configuration file: {e}")
     exit(1)
 
+# CARPETA DONDE SE ENCUENTRAN LOS LOGS
 carpeta = "/var/log/apache2"
+######################################
+
 for root, dirs, files in os.walk(carpeta):
     for file in files:
         if file.endswith("access.log.1"):
-            # print("Archivo encontrado:" + file)
+            print("Archivo encontrado:" + file)
             virtualh = file.split("-")[0]
-            # print(virtualh)
+            print(virtualh)
 
             log_pattern = re.compile(
                 r'(?P<ip>\S+) \S+ \S+ \[(?P<datetime>.*?)\] \"(?P<method>\S+) (?P<endpoint>.*?) (?P<protocol>.*?)\" (?P<status>\d{3}) (?P<bytes>\S+) \"(?P<referrer>.*?)\" \"(?P<user_agent>.*?)\"'
